@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mukta ❤️</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Mobile Screen Restriction Notice -->
+    <div id="mobileNotice" class="mobile-notice">
+        <div class="mobile-notice-content">
+            <i class="fa-solid fa-laptop"></i>
+            <h2>Best Experienced on Laptop</h2>
+            <p>Please open this magical page on a laptop or desktop computer for the full interactive experience.</p>
+        </div>
+    </div>
+
+    <!-- Audio Player -->
+    <audio id="bgMusic" loop src="assets/music/music.mp3"></audio>
+
+    <!-- Custom Sparkle Cursor -->
+    <div id="customCursor" class="custom-cursor">
+        <i class="fa-solid fa-star"></i>
+    </div>
+
+    <!-- Flashlight & Darkness Overlay Canvas -->
+    <canvas id="darknessCanvas"></canvas>
+
+    <!-- Ambient Sparkles & Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Main Birthday Scene -->
+    <div class="scene-container">
+        
+        <!-- Hanging Fairy Lights String -->
+        <div class="fairy-lights">
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+            <span class="bulb"></span>
+        </div>
+
+        <!-- Hanging Photo Strings & Polaroids -->
+        <div class="string-wrapper">
+            <svg class="string-svg" viewBox="0 0 1000 120">
+                <path d="M0,20 Q250,90 500,20 Q750,90 1000,20" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" />
+            </svg>
+            
+            <div class="polaroid-container">
+                <div class="polaroid swing-1">
+                    <div class="clip"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photos/photo1.jpg" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&auto=format&fit=crop'">
+                    </div>
+                    <span class="caption">Pyaar ✨</span>
+                </div>
+
+                <div class="polaroid swing-2">
+                    <div class="clip"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photos/photo2.jpg" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&auto=format&fit=crop'">
+                    </div>
+                    <span class="caption">Mohabbat 💖</span>
+                </div>
+
+                <div class="polaroid swing-3">
+                    <div class="clip"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photos/photo3.jpg" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&auto=format&fit=crop'">
+                    </div>
+                    <span class="caption">Me 🌸</span>
+                </div>
+
+                <div class="polaroid swing-4">
+                    <div class="clip"></div>
+                    <div class="photo-frame">
+                        <img src="assets/photos/photo4.jpg" alt="Memory 4" onerror="this.src='https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&auto=format&fit=crop'">
+                    </div>
+                    <span class="caption">& You🎀</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title Section -->
+        <div class="title-container">
+            <h1 class="main-title">Happy Birthday<br><span class="highlight-name">Mukta ❤️</span></h1>
+            <p class="subtitle">Meri Pyari lai Happy Birthdayy</p>
+        </div>
+
+        <!-- Interactive Candle & Cake Centerpiece -->
+        <div class="centerpiece-wrapper">
+            <!-- Secret Candle -->
+            <div id="secretCandle" class="candle-wrapper" title="Click to light up the surprise!">
+                <div class="flame-container">
+                    <div class="flame-glow"></div>
+                    <div class="flame"></div>
+                    <div class="spark-particles"></div>
+                </div>
+                <div class="candle-wick"></div>
+                <div class="candle-body"></div>
+            </div>
+
+            <!-- Birthday Cake -->
+            <div class="cake-wrapper">
+                <img src="assets/images/cake.png" alt="Birthday Cake" class="cake-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3132/3132693.png'">
+                <div class="cake-shadow"></div>
+            </div>
+        </div>
+
+        <!-- Surprise Trigger Button -->
+        <div class="button-wrapper">
+            <button id="surpriseBtn" class="surprise-btn hidden">
+                <i class="fa-solid fa-envelope-open-heart"></i> Open Surprise
+            </button>
+        </div>
+    </div>
+
+    <!-- Glassmorphism Modal -->
+    <!-- <div id="surpriseModal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="closeModal" class="close-btn">&times;</button>
+            <div class="modal-icon">💌</div>
+            <h2>Happy Birthday Mukta ❤️</h2>
+            <p class="modal-text">
+                May your smile always shine brighter than these candles. 
+                <br><br>
+                Wishing you a lifetime filled with warmth, endless laughter, pure love, and beautiful unforgettable memories.
+            </p>
+            <div class="modal-decorations">
+                <span>🌸</span><span>✨</span><span>🎀</span>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- External Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

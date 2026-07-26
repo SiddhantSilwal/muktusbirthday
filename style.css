@@ -1,0 +1,569 @@
+/* ==========================================================================
+   CSS Variables & Base Reset
+   ========================================================================== */
+:root {
+    --primary-pink: #FFD6E8;
+    --secondary-cream: #FFF6F8;
+    --accent-pink: #FF7EB6;
+    --rose-gold: #E8B4B8;
+    --dark-rose: #C86B85;
+    --gold: #FFD700;
+    --white: #FFFFFF;
+    --soft-shadow: rgba(0, 0, 0, 0.15);
+    
+    --font-heading: 'Great Vibes', cursive;
+    --font-subheading: 'Sacramento', cursive;
+    --font-body: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-body);
+    background-color: #120b10;
+    cursor: none;
+}
+
+/* ==========================================================================
+   Mobile Display Restriction Notice
+   ========================================================================== */
+.mobile-notice {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #1a0f18;
+    color: var(--primary-pink);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.mobile-notice-content i {
+    font-size: 4rem;
+    color: var(--accent-pink);
+    margin-bottom: 1.5rem;
+}
+
+.mobile-notice-content h2 {
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.mobile-notice-content p {
+    font-size: 1rem;
+    opacity: 0.8;
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+    .mobile-notice {
+        display: flex;
+    }
+}
+
+/* ==========================================================================
+   Custom Sparkle Cursor
+   ========================================================================== */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--gold);
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    filter: drop-shadow(0 0 6px var(--gold));
+}
+
+.cursor-particle {
+    position: fixed;
+    pointer-events: none;
+    background: var(--gold);
+    border-radius: 50%;
+    z-index: 9999;
+    animation: fadeOutParticle 0.8s ease-out forwards;
+}
+
+@keyframes fadeOutParticle {
+    0% { transform: scale(1) translate(0, 0); opacity: 0.9; }
+    100% { transform: scale(0) translate(var(--dx), var(--dy)); opacity: 0; }
+}
+
+/* ==========================================================================
+   Canvases (Darkness & Atmosphere Particles)
+   ========================================================================== */
+#darknessCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 500;
+    pointer-events: none;
+}
+
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   Background & Room Styling
+   ========================================================================== */
+.scene-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffd8e4 0%, #fff0f5 50%, #fbe4eb 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0 1rem 0;
+    overflow: hidden;
+}
+
+/* Wall Texture & Subtle Wallpaper Pattern */
+.scene-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--accent-pink) 0.75px, transparent 0.75px);
+    background-size: 24px 24px;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+/* Fairy Lights */
+.fairy-lights {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 15;
+    padding: 0 5%;
+}
+
+.bulb {
+    width: 12px;
+    height: 16px;
+    background: #ffeb3b;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 0 12px #ffeb3b;
+    animation: twinkle 1.8s infinite alternate ease-in-out;
+}
+
+.bulb:nth-child(even) {
+    animation-delay: 0.9s;
+    background: #ff7eb6;
+    box-shadow: 0 0 12px #ff7eb6;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ==========================================================================
+   Polaroid String & Cards (Enlarged)
+   ========================================================================== */
+.string-wrapper {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    max-width: 1400px; /* Expanded container width to fit larger cards */
+    z-index: 20;
+}
+
+.string-svg {
+    width: 100%;
+    height: 120px;
+}
+
+.polaroid-container {
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 4%;
+}
+
+.polaroid {
+    position: relative;
+    background: var(--white);
+    padding: 16px 16px 32px 16px; /* Increased padding */
+    border-radius: 6px;
+    box-shadow: 0 14px 30px var(--soft-shadow);
+    transform-origin: top center;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+}
+
+.polaroid:hover {
+    transform: scale(1.12) rotate(0deg) !important; /* Slightly bigger hover lift */
+    z-index: 30;
+    box-shadow: 0 20px 45px rgba(232, 180, 184, 0.5);
+}
+
+.clip {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 28px;
+    background: #d7ccc8;
+    border-radius: 3px;
+    border: 1px solid #a1887f;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+/* Enlarged Photo Frame */
+.photo-frame {
+    width: 210px;  /* Increased from 150px */
+    height: 210px; /* Increased from 150px */
+    overflow: hidden;
+    border-radius: 3px;
+    background: #f5f5f5;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caption {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-subheading);
+    font-size: 1.7rem; /* Increased font size for handwritten caption */
+    color: #4a4a4a;
+    text-align: center;
+}
+
+/* Natural Swing Animations */
+.swing-1 { animation: swing 4s infinite ease-in-out alternate; transform: rotate(-5deg); }
+.swing-2 { animation: swing 5s infinite ease-in-out alternate-reverse; transform: rotate(4deg); }
+.swing-3 { animation: swing 4.5s infinite ease-in-out alternate; transform: rotate(-3deg); }
+.swing-4 { animation: swing 5.5s infinite ease-in-out alternate-reverse; transform: rotate(6deg); }
+
+@keyframes swing {
+    0% { transform: rotate(-4deg); }
+    100% { transform: rotate(4deg); }
+}
+
+/* Adjusted Title Top Margin to prevent overlap with larger polaroids */
+.title-container {
+    margin-top: 280px; /* Increased from 190px */
+    text-align: center;
+    z-index: 25;
+}
+
+/* ==========================================================================
+   Main Title Section
+   ========================================================================== */
+.title-container {
+    margin-top: 190px;
+    text-align: center;
+    z-index: 25;
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    color: var(--white);
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(255, 126, 182, 0.6), 2px 2px 8px rgba(0,0,0,0.1);
+    animation: floatText 4s ease-in-out infinite alternate;
+}
+
+.highlight-name {
+    background: linear-gradient(45deg, #ff4081, #ff80ab, #ff4081);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(255, 128, 171, 0.8));
+}
+
+.subtitle {
+    font-family: var(--font-subheading);
+    font-size: 2.2rem;
+    color: #8e5063;
+    margin-top: 0.5rem;
+}
+
+@keyframes floatText {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-8px); }
+}
+
+/* ==========================================================================
+   Interactive Candle & Cake
+   ========================================================================== */
+.centerpiece-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 30;
+    margin-bottom: 20px;
+}
+
+/* Candle Setup */
+.candle-wrapper {
+    position: relative;
+    width: 16px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: -10px;
+    z-index: 35;
+}
+
+.candle-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #ffd1dc, #ffffff, #e8b4b8);
+    border-radius: 8px 8px 2px 2px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.candle-wick {
+    width: 3px;
+    height: 10px;
+    background: #4a4a4a;
+    border-radius: 2px 2px 0 0;
+}
+
+/* Realistic Flame */
+.flame-container {
+    position: absolute;
+    top: -28px;
+    width: 20px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.candle-wrapper:hover .flame-container {
+    transform: scale(1.25);
+}
+
+.flame {
+    position: absolute;
+    width: 16px;
+    height: 26px;
+    background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffeb3b 35%, #ff9800 70%, rgba(255,87,34,0) 100%);
+    border-radius: 50% 50% 20% 20% / 80% 80% 30% 30%;
+    animation: flicker 0.15s infinite alternate ease-in-out;
+    filter: drop-shadow(0 0 10px #ff9800);
+}
+
+.flame-glow {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(circle, rgba(255, 152, 0, 0.4) 0%, rgba(255, 235, 59, 0) 70%);
+    border-radius: 50%;
+    animation: pulseGlow 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes flicker {
+    0% { transform: rotate(-2deg) scale(0.98); }
+    100% { transform: rotate(2deg) scale(1.03); }
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Cake */
+.cake-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -80px;   /* Pulls the candle & cake up */
+    margin-bottom: 30px; /* Adds space above the button */
+}
+
+.cake-img {
+    width: 550px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 20px rgba(0,0,0,0.12));
+    animation: floatCake 3.5s ease-in-out infinite alternate;
+}
+
+.cake-shadow {
+    width: 180px;
+    height: 18px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 70%);
+    margin-top: -10px;
+    animation: scaleShadow 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatCake {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes scaleShadow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(0.85); opacity: 0.4; }
+}
+
+/* ==========================================================================
+   Surprise Button
+   ========================================================================== */
+.button-wrapper {
+    z-index: 40;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.surprise-btn {
+    padding: 12px 32px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--white);
+    background: linear-gradient(45deg, var(--accent-pink), var(--dark-rose));
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(255, 126, 182, 0.4);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.surprise-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(255, 126, 182, 0.6);
+}
+
+.surprise-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+/* ==========================================================================
+   Glassmorphism Modal
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(18, 11, 16, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    padding: 2.5rem 3rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    transform: scale(0.8) translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover { color: var(--accent-pink); }
+
+.modal-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+.modal-card h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--dark-rose);
+    margin-bottom: 1rem;
+}
+
+.modal-text {
+    font-size: 1.15rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.modal-decorations {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
